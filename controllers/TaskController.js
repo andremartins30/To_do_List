@@ -36,7 +36,14 @@ module.exports = class TaskController{
         await Task.deleteOne({_id : id})
 
         res.redirect('/tasks')
+    }
 
+    static async editTask(req, res){
+        const id = req.params.id
+
+        const task =  await Task.findById(id).lean()
+
+        res.render('tasks/edit', { task })
     }
 
     
