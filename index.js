@@ -1,6 +1,7 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const conn = require('./db/conn.js')
+import {env} from 'process'
 
 const app = express()
 
@@ -20,5 +21,5 @@ app.use(express.static('public'))
 
 app.use('/tasks', taskRoutes)
 
-app.listen(3000)
+app.listen(process.env.PORT || 3000)
     console.log('Servidor rodando na porta: http://localhost:3000/tasks')
