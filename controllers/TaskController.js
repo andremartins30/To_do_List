@@ -17,7 +17,6 @@ module.exports = class TaskController{
         done: false,})
 
        await task.save()
-            console.log('Task Criada!')
         res.redirect('/tasks')
        
     }
@@ -57,4 +56,17 @@ module.exports = class TaskController{
 
         res.redirect('/tasks')
     }
+
+    static async changeTaskStatus(req, res){
+        const id = req.body.id
+
+        const task = {
+            done: req.body.done === "false" ? true : false,
+        }
+
+        await Task.updateOne({_id:id}, task)
+
+        res.redirect('/tasks')
+    }
+
 }
