@@ -1,7 +1,6 @@
 const express = require('express')
 const exphbs = require('express-handlebars')
 const conn = require('./db/conn.js')
-import {env} from 'process'
 
 const app = express()
 
