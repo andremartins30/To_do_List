@@ -46,5 +46,15 @@ module.exports = class TaskController{
         res.render('tasks/edit', { task })
     }
 
-    
+    static async editTaskPost(req, res){
+        const id = req.body.id
+        const title = req.body.title
+        const description = req.body.description
+
+        const task = {title, description}
+
+        await Task.updateOne({ _id :id }, task)
+
+        res.redirect('/tasks')
+    }
 }
