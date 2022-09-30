@@ -10,4 +10,5 @@ const Task = mongoose.model(
     },
     {timestamps: true},),
 )
+
 module.exports = Task

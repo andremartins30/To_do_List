@@ -10,7 +10,6 @@ module.exports = class TaskController{
        const title = req.body.title
        const description = req.body.description
        
-       
        const task = new Task({
         title:title,
         description: description,
