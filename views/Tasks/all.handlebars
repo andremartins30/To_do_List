@@ -4,10 +4,8 @@
         <li>
             {{#if this.done}}
                 <a href="/" class="title done">{{this.title}}</a>
-                
             {{else}}
                 <a href="/" class="title">{{this.title}}</a>
-                
             {{/if}}
            <div class="actions">
                 <form action="/tasks/changestatus" method="POST">
