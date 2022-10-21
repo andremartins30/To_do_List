@@ -1,74 +1,28 @@
 const express = require('express')
 const router = express.Router()
-const Task = require('../model/Task')
 
-router.get('/add', (req, res) => {
-    res.render('tasks/create')
-})
+const {
+    renderTaskForm,
+    createNewTask,
+    showTasks,
+    deleteTask,
+    renderEditForm, 
+    updateTask
+} = require('../controllers/task.controllers')
 
-router.get('/', async (req, res) =>{
+//new task
+router.get('/tasks/add', renderTaskForm)
+router.post('/tasks/add', createNewTask)
 
-    const tasks = await Task.find().lean()
+//Show task
+router.get('/', showTasks)
 
-    res.render('tasks/all', { tasks })
-})
+//Delete Task
+router.post('/tasks/remove/:id', deleteTask)
 
-router.post('/add', async(req, res) => {
-    const title = req.body.title
-    const description = req.body.description
-    
-    const task = new Task({
-     title:title,
-     description: description,
-     done: false,})
+//Edit Task
+router.get('/tasks/edit/:id', renderEditForm)
+router.post('/tasks/edit', updateTask)
 
-    await task.save()
-     res.redirect('/tasks')
-    
- })
-
-router.post('/remove/:id', async (req, res) => {
-
-    const id = req.params.id
-
-    await Task.deleteOne({_id : id})
-
-    res.redirect('/tasks')
-})
-
-
-router.get('/edit/:id', async (req, res) => {
-    const id = req.params.id
-
-    const task =  await Task.findById(id).lean()
-
-    res.render('tasks/edit', { task })
-})
-
-
-router.post('/edit', async(req, res) => {
-    const id = req.body.id
-    const title = req.body.title
-    const description = req.body.description
-
-    const task = {title, description}
-
-    await Task.updateOne({ _id :id }, task)
-
-    res.redirect('/tasks')
-})
-
-
-router.post('/changestatus', async(req, res) => {
-    const id = req.body.id
-
-    const task = {
-        done: req.body.done === "false" ? true : false,
-    }
-
-    await Task.updateOne({_id:id}, task)
-
-    res.redirect('/tasks')
-})
 
 module.exports = router

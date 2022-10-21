@@ -1,11 +1,10 @@
 const mongoose = require('mongoose')
 
-async function main(){
-    await mongoose.connect('mongodb+srv://andremartins30:Kabana12@cluster0.7qd9cly.mongodb.net/?retryWrites=true&w=majority')
-    console.log('Conectado ao Mongooose!')
-}
+const MONGO_URI = 'mongodb+srv://andremartins30:Kabana12@cluster0.7qd9cly.mongodb.net/MyFirstDatabase?retryWrites=true&w=majority'
 
-main().catch((err) => console.log(err))
-
-
-module.exports = mongoose
+mongoose.connect(MONGO_URI, {
+    useUnifiedTopology: true,
+    useNewUrlParser: true
+})
+.then(db => console.log('Mongoose conectado...'))
+.catch((err => console.log(err)))
