@@ -45,4 +45,18 @@ taskCtrl.deleteTask = async (req, res) => {
     res.redirect('/')
 }
 
+taskCtrl.changeTaskStatus = async (req, res) => {
+    const id = req.body.id
+
+    const task = {
+        done: req.body.done === "false" ? true : false,
+    }
+
+    await Task.updateOne({_id:id}, task)
+
+    console.log(task)
+
+    res.redirect('/')
+}
+
 module.exports = taskCtrl

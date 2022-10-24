@@ -7,7 +7,8 @@ const {
     showTasks,
     deleteTask,
     renderEditForm, 
-    updateTask
+    updateTask,
+    changeTaskStatus
 } = require('../controllers/task.controllers')
 
 //new task
@@ -24,5 +25,7 @@ router.post('/tasks/remove/:id', deleteTask)
 router.get('/tasks/edit/:id', renderEditForm)
 router.post('/tasks/edit', updateTask)
 
+// Change Task
+router.post('/tasks/changestatus', changeTaskStatus)
 
 module.exports = router
