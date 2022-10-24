@@ -3,7 +3,7 @@ const taskCtrl = {}
 const Task = require('../models/Task')
 
 taskCtrl.renderTaskForm = (req, res) => {
-    res.render('tasks/create')
+    res.render('tasks/create-tasks')
 }
 
 taskCtrl.createNewTask = async (req, res) => {
@@ -16,13 +16,13 @@ taskCtrl.createNewTask = async (req, res) => {
 
 taskCtrl.showTasks = async (req, res) => {
     const tasks = await Task.find().lean()
-    res.render('tasks/all', {tasks})
+    res.render('tasks/all-tasks', {tasks})
 }
 
 taskCtrl.renderEditForm = async (req, res) => {
     const id = req.params.id
     const task = await Task.findById(id).lean()
-    res.render('tasks/edit', {task})
+    res.render('tasks/edit-tasks', {task})
 }
 
 taskCtrl.updateTask = async (req, res) => {
